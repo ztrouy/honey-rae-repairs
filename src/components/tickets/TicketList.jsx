@@ -46,7 +46,7 @@ export const TicketList = () => {
         </div>
         <article className="tickets">
         {filteredTickets.map(ticketObj => {
-            return <Ticket ticket={ticketObj}/>
+            return <Ticket ticket={ticketObj} key={ticketObj.id}/>
         })}
         </article>
     </div>
