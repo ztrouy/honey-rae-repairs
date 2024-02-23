@@ -1,6 +1,6 @@
 export const Ticket = (props) => {
     return (
-        <section className="ticket" key={props.ticket.id}>
+        <section className="ticket">
             <header className="ticket-info">#{props.ticket.id}</header>
             <div>{props.ticket.description}</div>
             <footer>
