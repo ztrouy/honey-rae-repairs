@@ -7,7 +7,8 @@ export const TicketList = () => {
     const [allTickets, setAllTickets] = useState([])
     const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
     const [filteredTickets, setFilteredTickets] = useState([])
-    
+    const [searchTerm, setSearchTerm] = useState("")
+
     useEffect(() => {
         getAllTickets().then(ticketsArray => {
         setAllTickets(ticketsArray)
@@ -44,6 +45,7 @@ export const TicketList = () => {
                 Show All
             </button>
             <input
+                onChange={(event) => {setSearchTerm(event.target.value)}}
                 type="text"
                 placeholder="Search Tickets"
                 className="ticket-search"
