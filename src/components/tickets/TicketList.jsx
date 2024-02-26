@@ -18,12 +18,18 @@ export const TicketList = () => {
 
     useEffect(() => {
         if (showEmergencyOnly) {
-        const emergencyTickets = allTickets.filter(ticket => ticket.emergency === true)
-        setFilteredTickets(emergencyTickets)
+            const emergencyTickets = allTickets.filter(ticket => ticket.emergency === true)
+            setFilteredTickets(emergencyTickets)
         } else {
-        setFilteredTickets(allTickets)
+            setFilteredTickets(allTickets)
         }
     }, [showEmergencyOnly, allTickets])
+
+    useEffect(() => {
+        const foundTickets = allTickets.filter(ticket => ticket.description.toLowerCase().includes(searchTerm.toLowerCase()))
+        setFilteredTickets(foundTickets)
+    }, [searchTerm, allTickets])
+
 
     return <div className="tickets-container">
         <h2>Tickets</h2>
