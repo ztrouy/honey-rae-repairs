@@ -26,23 +26,28 @@ export const TicketList = () => {
 
     return <div className="tickets-container">
         <h2>Tickets</h2>
-        <div>
-        <button 
-            className="filter-btn btn-primary" 
-            onClick={() => {
-            setShowEmergencyOnly(true)
-            }}
-        >
-            Emergency
-        </button>
-        <button 
-            className="filter-btn btn-info" 
-            onClick={() => {
-            setShowEmergencyOnly(false)
-            }}
-        >
-            Show All
-        </button>
+        <div className="filter-bar">
+            <button 
+                className="filter-btn btn-primary" 
+                onClick={() => {
+                setShowEmergencyOnly(true)
+                }}
+            >
+                Emergency
+            </button>
+            <button 
+                className="filter-btn btn-info" 
+                onClick={() => {
+                setShowEmergencyOnly(false)
+                }}
+            >
+                Show All
+            </button>
+            <input
+                type="text"
+                placeholder="Search Tickets"
+                className="ticket-search"
+            />
         </div>
         <article className="tickets">
         {filteredTickets.map(ticketObj => {
