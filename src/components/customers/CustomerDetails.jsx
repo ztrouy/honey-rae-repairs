@@ -9,20 +9,7 @@ export const CustomerDetails = () => {
 
     const { customerId } = useParams() // { customerId: 3}
 
-    const baseObj = {
-        id: 0,
-        address: "",
-        phoneNumber: "",
-        userId: 0,
-        user: {
-            id: 0,
-            fullName: "",
-            email: "",
-            isStaff: false
-        }
-    }
-
-    const [customer, setCustomer] = useState(baseObj)
+    const [customer, setCustomer] = useState({})
 
     useEffect(() => {
         getCustomerDetails(customerId).then(customerArray => {
@@ -34,7 +21,7 @@ export const CustomerDetails = () => {
 
     return (
         <section className="customer">
-            <div className="customer-header">{customer.user.fullName}</div>
+            <div className="customer-header">{customer.user?.fullName}</div>
             <div>
                 <span className="customer-info">Address: </span>
                 <span>{customer.address}</span>
@@ -45,7 +32,7 @@ export const CustomerDetails = () => {
             </div>
             <div>
                 <span className="customer-info">Email: </span>
-                <span>{customer.user.email}</span>
+                <span>{customer.user?.email}</span>
             </div>
         </section>
     )
