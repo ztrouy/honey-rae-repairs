@@ -17,8 +17,6 @@ export const CustomerDetails = () => {
         })
     }, [])
 
-    console.log(customer)
-
     return (
         <section className="customer">
             <div className="customer-header">{customer.user?.fullName}</div>
