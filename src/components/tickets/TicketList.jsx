@@ -3,18 +3,19 @@ import { getAllTickets } from "../../services/ticketService.jsx"
 import { Ticket } from "./Ticket.jsx"
 import { TicketFilterBar } from "./TicketFilterBar.jsx"
 import "./Tickets.css"
+import { getAllEmployees } from "../../services/employeeService.jsx"
 
-export const TicketList = () => {
+export const TicketList = ({ currentUser }) => {
     const [allTickets, setAllTickets] = useState([])
     const [filteredTickets, setFilteredTickets] = useState([])
     const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
     const [searchTerm, setSearchTerm] = useState("")
+    const [allEmployees, setAllEmployees] = useState([])
     
 
     useEffect(() => {
         getAllTickets().then(ticketsArray => {
         setAllTickets(ticketsArray)
-        console.log("Tickets are set!")
         })
     }, []) // ONLY runs on initial render of component, as array is empty
 
@@ -32,13 +33,19 @@ export const TicketList = () => {
         setFilteredTickets(foundTickets)
     }, [searchTerm, allTickets])
 
+    useEffect(() => {
+        getAllEmployees().then(employeesArray => {
+            setAllEmployees(employeesArray)
+        })
+    }, [])
+
 
     return <div className="tickets-container">
         <h2>Tickets</h2>
         <TicketFilterBar setShowEmergencyOnly={setShowEmergencyOnly} setSearchTerm={setSearchTerm} />
         <article className="tickets">
         {filteredTickets.map(ticketObj => {
-            return <Ticket ticket={ticketObj} key={ticketObj.id}/>
+            return <Ticket ticket={ticketObj} allEmployees={allEmployees} currentUser={currentUser} key={ticketObj.id}/>
         })}
         </article>
     </div>
