@@ -25,3 +25,11 @@ export const updateTicket = (ticket) => {
     
     return fetch(`http://localhost:8088/serviceTickets/${ticket.id}`, putOptions)
 }
+
+export const deleteTicket = (ticketId) => {
+    const deleteOptions = {
+        method: "DELETE"
+    }
+
+    return fetch(`http://localhost:8088/serviceTickets/${ticketId}`, deleteOptions)
+}
