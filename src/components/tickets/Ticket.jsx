@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { assignTicket, deleteTicket, updateTicket } from "../../services/ticketService.jsx"
+import { useNavigate } from "react-router-dom"
 
 export const Ticket = ({ ticket, allEmployees, currentUser, getAndSetTickets }) => {
     const [assignedEmployee, setAssignedEmployee] = useState({})
@@ -44,6 +45,12 @@ export const Ticket = ({ ticket, allEmployees, currentUser, getAndSetTickets }) 
             getAndSetTickets()
         })
     }
+
+    const navigate = useNavigate()
+
+    const handleEdit = () => {
+        navigate(`/tickets/${ticket.id}`)
+    }
     
     return (
         <section className="ticket">
@@ -85,11 +92,19 @@ export const Ticket = ({ ticket, allEmployees, currentUser, getAndSetTickets }) 
                         ""
                     )}
                     {!currentUser.isStaff && (
-                        <button 
-                            className="btn btn-warning"
-                            onClick={handleDelete}
-                        >Delete
-                        </button>
+                        <>
+                            <button
+                                className="btn btn-secondary"
+                                style={{marginRight: 15}}
+                                onClick={handleEdit}
+                            >Edit
+                            </button>
+                            <button 
+                                className="btn btn-warning"
+                                onClick={handleDelete}
+                            >Delete
+                            </button>
+                        </>
                     )}
                 </div>
             </footer>
