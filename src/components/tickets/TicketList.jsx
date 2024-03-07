@@ -9,6 +9,7 @@ export const TicketList = ({ currentUser }) => {
     const [allTickets, setAllTickets] = useState([])
     const [filteredTickets, setFilteredTickets] = useState([])
     const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
+    const [showOpenOnly, setShowOpenOnly] = useState(false)
     const [searchTerm, setSearchTerm] = useState("")
     const [allEmployees, setAllEmployees] = useState([])
     
@@ -38,6 +39,15 @@ export const TicketList = ({ currentUser }) => {
     }, [showEmergencyOnly, allTickets])
 
     useEffect(() => {
+        if (showOpenOnly) {
+            const openTickets = allTickets.filter(ticket => ticket.dateCompleted === "")
+            setFilteredTickets(openTickets)
+        } else {
+            setFilteredTickets(allTickets)
+        }
+    }, [showOpenOnly, allTickets])
+
+    useEffect(() => {
         const foundTickets = allTickets.filter(ticket => ticket.description.toLowerCase().includes(searchTerm.toLowerCase()))
         setFilteredTickets(foundTickets)
     }, [searchTerm, allTickets])
@@ -51,7 +61,12 @@ export const TicketList = ({ currentUser }) => {
 
     return <div className="tickets-container">
         <h2>Tickets</h2>
-        <TicketFilterBar setShowEmergencyOnly={setShowEmergencyOnly} setSearchTerm={setSearchTerm} />
+        <TicketFilterBar 
+            setShowEmergencyOnly={setShowEmergencyOnly} 
+            setSearchTerm={setSearchTerm} 
+            setShowOpenOnly={setShowOpenOnly}
+            currentUser={currentUser} 
+        />
         <article className="tickets">
         {filteredTickets.map(ticketObj => {
             return (
