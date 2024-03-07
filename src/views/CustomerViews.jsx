@@ -3,6 +3,7 @@ import { Welcome } from "../components/welcome/Welcome.jsx"
 import { CustomerNav } from "../components/nav/CustomerNav.jsx"
 import { TicketList } from "../components/tickets/TicketList.jsx"
 import { TicketForm } from "../components/forms/TicketForm.jsx"
+import { CustomerForm } from "../components/forms/CustomerForm.jsx"
 
 export const CustomerViews = ({ currentUser }) => {
     return (
@@ -19,6 +20,7 @@ export const CustomerViews = ({ currentUser }) => {
                     <Route path="create" element={<TicketForm currentUser={currentUser} />} />
                     <Route path=":ticketId" element={<TicketForm currentUser={currentUser} />} />
                 </Route>
+                <Route path="profile" element={<CustomerForm currentUser={currentUser} />} />
             </Route>
         </Routes>
     )
